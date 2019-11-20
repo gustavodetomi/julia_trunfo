@@ -66,8 +66,8 @@ function carregaCartas(baralho)
     addCarta(carta("COBOL",4,1,8,1,1),baralho)
     addCarta(carta("Fortran",0,2,8,3,1),baralho)
     addCarta(carta("Julia",11,11,11,11,11),baralho)
-
 end
+
 
 # DISTRIBUI AS CARTAS
 function separaBaralho(baralho,cartasJogador,cartasComputador)
@@ -80,6 +80,17 @@ function separaBaralho(baralho,cartasJogador,cartasComputador)
             addCarta(pop!(baralho),cartasComputador)
             reveza = true
         end
+    end
+end
+
+# EMBARALHA O BARALHO
+function embaralhaObaralho(baralho)
+    for i = 1:256
+        tam = length(baralho)
+        muda = rand(1:tam)
+        aux = baralho[muda]
+        deleteat!(baralho,muda)
+        push!(baralho, aux)
     end
 end
 
@@ -281,6 +292,7 @@ cartasComputador = carta[]
 
 # CRIA E SEPARA AS CARTAS
 carregaCartas(baralho)
+embaralhaObaralho(baralho)
 separaBaralho(baralho,cartasJogador,cartasComputador)
 
 # INICIA O JOGO 
